@@ -562,13 +562,27 @@ body {
 
 body::before {
   content: "";
-  background: url("./images/bg-intro-mobile.png");
+  background: url("./images/bg-intro-desktop.png") no-repeat;
+  background-size: 1412px 800px;
+  background-position: center;
   position: absolute;
   z-index: -10;
-  height: 100%;
+  height: 100vh;
   width: 100vw;
   --tw-bg-opacity: 1;
   background-color: hsl(0 100% 74% / var(--tw-bg-opacity));
+}
+
+@media (orientation: portrait) or (max-width: 375px) {
+  body::before {
+    background: url("./images/bg-intro-mobile.png");
+    position: absolute;
+    z-index: -10;
+    height: 100%;
+    width: 100vw;
+    --tw-bg-opacity: 1;
+    background-color: hsl(0 100% 74% / var(--tw-bg-opacity));
+  }
 }
 
 main {
@@ -640,15 +654,15 @@ main {
 
 .cta {
   box-shadow: 0px 8px 0px 0px rgba(0, 0, 0, 0.15);
-  margin-bottom: 1.5rem;
+  margin-bottom: calc(100vh / 800 * 24);
   width: 100%;
   border-radius: 0.5rem;
   --tw-bg-opacity: 1;
   background-color: hsl(248 32% 49% / var(--tw-bg-opacity));
   padding-left: 3.5rem;
   padding-right: 3.5rem;
-  padding-top: 21px;
-  padding-bottom: 17px;
+  padding-top: calc(100vh / 800 * 21);
+  padding-bottom: calc(100vh / 800 * 17);
   font-size: 15px;
   line-height: 25px;
   letter-spacing: 0.005rem;
@@ -670,10 +684,6 @@ main {
   }
 }
 
-.form {
-  /* @apply w-full; */
-}
-
 form {
   box-shadow: 0px 8px 0px 0px rgba(0, 0, 0, 0.15);
   width: 100%;
@@ -685,26 +695,24 @@ form {
 
 @media (min-width: 1024px) {
   form {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
+    padding: calc(100vh / 800 * 40);
   }
 }
 
-form > input {
-  margin-bottom: 1rem;
+form input {
+  margin-bottom: calc(100vh / 800 * 16);
   width: 100%;
   border-radius: 0.375rem;
   border-width: 1px;
   border-color: hsl(246 25% 77% / 0.6);
   padding-left: 18px;
   padding-right: 18px;
-  padding-top: 15px;
-  padding-bottom: 14px;
+  padding-top: calc(100vh / 800 * 15);
+  padding-bottom: calc(100vh / 800 * 14);
+  font-weight: 600;
 }
 
-form > input::-moz-placeholder {
+form input::-moz-placeholder {
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 600;
@@ -712,35 +720,72 @@ form > input::-moz-placeholder {
   color: hsl(249 10% 26% / 0.75);
 }
 
-form > input::placeholder {
+form input::placeholder {
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 600;
   letter-spacing: 0.01rem;
   color: hsl(249 10% 26% / 0.75);
+}
+
+form input:focus {
+  outline-style: solid;
+  outline-width: 1px;
+  outline-color: hsl(249, 10%, 26%) ;
 }
 
 @media (min-width: 1024px) {
-  form > input {
-    margin-bottom: 1.25rem;
+  form input {
+    margin-bottom: calc(100vh / 800 * 20);
     padding-left: 32px;
     padding-right: 32px;
   }
 }
 
+.invalid {
+  position: relative;
+  --tw-border-opacity: 1;
+  border-color: hsl(0 100% 74% / var(--tw-border-opacity));
+  --tw-text-opacity: 1;
+  color: hsl(0 100% 74% / var(--tw-text-opacity));
+}
+
+.invalid::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: hsl(0 100% 74% / var(--tw-text-opacity));
+}
+
+.invalid::placeholder {
+  --tw-text-opacity: 1;
+  color: hsl(0 100% 74% / var(--tw-text-opacity));
+}
+
+.invalid:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+form button[type="submit"]:hover {
+  box-shadow: 0px 4px 0px 0px hsla(154, 59%, 46%, 0.75);
+}
+
 form button[type="submit"] {
   box-shadow: 0px 4px 0px 0px hsl(154, 59%, 46%);
-  margin-bottom: 14px;
+  margin-bottom: calc(100vw / 800 * 8);
   width: 100%;
   border-radius: 0.375rem;
   --tw-bg-opacity: 1;
   background-color: hsl(154 59% 51% / var(--tw-bg-opacity));
-  padding-top: 1rem;
-  padding-bottom: 0.75rem;
+  padding-top: calc(100vh / 800 * 16);
+  padding-bottom: calc(100vh / 800 * 12);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+form button[type="submit"]:hover {
+  background-color: hsl(154 59% 51% / 0.75);
 }
 
 form p {
@@ -754,6 +799,36 @@ form p {
 
 form p a {
   font-weight: 700;
+  --tw-text-opacity: 1;
+  color: hsl(0 100% 74% / var(--tw-text-opacity));
+}
+
+label {
+  position: relative;
+}
+
+.label-invalid::before {
+  content: "";
+  background: url("./images/icon-error.svg") no-repeat;
+  background-size: cover;
+  position: absolute;
+  right: 0.75rem;
+  z-index: 20;
+  display: block;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.required {
+  margin-bottom: calc(100vh / 800 * 7);
+  --tw-translate-y: -12px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  text-align: right;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-size: 11px;
+  font-weight: 600;
+  font-style: italic;
   --tw-text-opacity: 1;
   color: hsl(0 100% 74% / var(--tw-text-opacity));
 }

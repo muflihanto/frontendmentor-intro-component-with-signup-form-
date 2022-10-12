@@ -11,8 +11,17 @@ body {
 
 body::before {
   content: "";
-  background: url("./images/bg-intro-mobile.png");
-  @apply absolute -z-10 bg-primary-red w-screen h-full;
+  background: url("./images/bg-intro-desktop.png") no-repeat;
+  background-size: 1412px 800px;
+  background-position: center;
+  @apply absolute -z-10 bg-primary-red w-screen h-screen;
+}
+
+@media (orientation: portrait) or (max-width: 375px) {
+  body::before {
+    background: url("./images/bg-intro-mobile.png");
+    @apply absolute -z-10 bg-primary-red w-screen h-full;
+  }
 }
 
 main {
@@ -33,7 +42,7 @@ main {
 
 .cta {
   box-shadow: 0px 8px 0px 0px rgba(0, 0, 0, 0.15);
-  @apply bg-accent leading-[25px] rounded-lg px-14 tracking-[0.005rem] text-white pt-[21px] pb-[17px] mb-6 text-[15px] w-full;
+  @apply bg-accent leading-[25px] rounded-lg px-14 tracking-[0.005rem] text-white pt-[calc(100vh/800*21)] pb-[calc(100vh/800*17)] mb-[calc(100vh/800*24)] text-[15px] w-full;
 }
 
 .cta span {
@@ -42,21 +51,28 @@ main {
 
 .form {
   @apply w-full lg:w-[86vw];
-  /* @apply w-full; */
 }
 
 form {
   box-shadow: 0px 8px 0px 0px rgba(0, 0, 0, 0.15);
-  @apply bg-white w-full p-6 rounded-lg lg:px-10 lg:py-10;
+  @apply bg-white w-full p-6 rounded-lg lg:p-[calc(100vh/800*40)];
 }
 
-form > input {
-  @apply w-full px-[18px] pt-[15px] pb-[14px] border-base-200/60 border-[1px] rounded-md placeholder:text-base-100/75 placeholder:text-sm placeholder:font-semibold mb-4 placeholder:tracking-[0.01rem] lg:mb-5 lg:px-[32px];
+form input {
+  @apply w-full px-[18px] pt-[calc(100vh/800*15)] pb-[calc(100vh/800*14)] border-base-200/60 border-[1px] rounded-md placeholder:text-base-100/75 placeholder:text-sm placeholder:font-semibold mb-[calc(100vh/800*16)] placeholder:tracking-[0.01rem] lg:mb-[calc(100vh/800*20)] lg:px-[32px] focus:outline focus:outline-base-100 focus:outline-1 font-semibold;
+}
+
+.invalid {
+  @apply border-primary-red text-primary-red placeholder:text-primary-red focus:outline-none relative;
+}
+
+form button[type="submit"]:hover {
+  box-shadow: 0px 4px 0px 0px hsla(154, 59%, 46%, 0.75);
 }
 
 form button[type="submit"] {
   box-shadow: 0px 4px 0px 0px hsl(154, 59%, 46%);
-  @apply bg-primary-green text-white pt-4 pb-3 w-full rounded-md uppercase  tracking-wider mb-[14px];
+  @apply bg-primary-green hover:bg-primary-green/75 text-white pt-[calc(100vh/800*16)] pb-[calc(100vh/800*12)] w-full rounded-md uppercase tracking-wider mb-[calc(100vw/800*8)];
 }
 
 form p {
@@ -65,6 +81,21 @@ form p {
 
 form p a {
   @apply text-primary-red font-bold;
+}
+
+label {
+  @apply relative;
+}
+
+.label-invalid::before {
+  content: "";
+  background: url("./images/icon-error.svg") no-repeat;
+  background-size: cover;
+  @apply block absolute right-3 w-6 h-6 z-20;
+}
+
+.required {
+  @apply text-primary-red text-xs -translate-y-[12px] text-right mb-[calc(100vh/800*7)] text-[11px] font-semibold italic;
 }
 
 .attribution {
