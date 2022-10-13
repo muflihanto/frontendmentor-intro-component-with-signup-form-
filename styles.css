@@ -563,26 +563,17 @@ body {
 body::before {
   content: "";
   background: url("./images/bg-intro-desktop.png") no-repeat;
-  background-size: 1412px 800px;
+  /* background-size: calc(1412 / 1440 * 100vw) 100vh; */
+  padding-inline: 14px;
+  background-origin: content-box;
+  background-size: cover;
   background-position: center;
   position: absolute;
   z-index: -10;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   --tw-bg-opacity: 1;
   background-color: hsl(0 100% 74% / var(--tw-bg-opacity));
-}
-
-@media (orientation: portrait) or (max-width: 375px) {
-  body::before {
-    background: url("./images/bg-intro-mobile.png");
-    position: absolute;
-    z-index: -10;
-    height: 100%;
-    width: 100vw;
-    --tw-bg-opacity: 1;
-    background-color: hsl(0 100% 74% / var(--tw-bg-opacity));
-  }
 }
 
 main {
@@ -649,7 +640,9 @@ main {
 }
 
 .hero p {
+  font-weight: 500;
   line-height: 26px;
+  color: rgb(255 255 255 / 0.75);
 }
 
 .cta {
@@ -661,11 +654,12 @@ main {
   background-color: hsl(248 32% 49% / var(--tw-bg-opacity));
   padding-left: 3.5rem;
   padding-right: 3.5rem;
-  padding-top: calc(100vh / 800 * 21);
-  padding-bottom: calc(100vh / 800 * 17);
+  padding-top: calc(100vh / 800 * 19);
+  padding-bottom: calc(100vh / 800 * 16);
   font-size: 15px;
+  font-weight: 300;
   line-height: 25px;
-  letter-spacing: 0.005rem;
+  letter-spacing: 0.02rem;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -675,6 +669,7 @@ main {
 }
 
 .form {
+  margin-top: 0.25rem;
   width: 100%;
 }
 
@@ -707,9 +702,13 @@ form input {
   border-color: hsl(246 25% 77% / 0.6);
   padding-left: 18px;
   padding-right: 18px;
-  padding-top: calc(100vh / 800 * 15);
-  padding-bottom: calc(100vh / 800 * 14);
+  padding-top: calc(100vh / 800 * 17);
+  padding-bottom: calc(100vh / 800 * 15);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   font-weight: 600;
+  --tw-text-opacity: 1;
+  color: hsl(249 10% 26% / var(--tw-text-opacity));
 }
 
 form input::-moz-placeholder {
@@ -729,16 +728,17 @@ form input::placeholder {
 }
 
 form input:focus {
-  outline-style: solid;
-  outline-width: 1px;
-  outline-color: hsl(249, 10%, 26%) ;
+  border-width: 1px;
+  border-color: hsl(249 10% 26% / 0.7);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 @media (min-width: 1024px) {
   form input {
     margin-bottom: calc(100vh / 800 * 20);
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: calc(100vh / 800 * 32);
+    padding-right: calc(100vh / 800 * 32);
   }
 }
 
@@ -765,34 +765,32 @@ form input:focus {
   outline-offset: 2px;
 }
 
-form button[type="submit"]:hover {
-  box-shadow: 0px 4px 0px 0px hsla(154, 59%, 46%, 0.75);
-}
-
 form button[type="submit"] {
   box-shadow: 0px 4px 0px 0px hsl(154, 59%, 46%);
-  margin-bottom: calc(100vw / 800 * 8);
+  margin-bottom: calc(100vw / 800 * 9);
   width: 100%;
   border-radius: 0.375rem;
   --tw-bg-opacity: 1;
   background-color: hsl(154 59% 51% / var(--tw-bg-opacity));
-  padding-top: calc(100vh / 800 * 16);
-  padding-bottom: calc(100vh / 800 * 12);
+  padding-top: calc(100vh / 800 * 18);
+  padding-bottom: calc(100vh / 800 * 10);
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.0275rem;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 form button[type="submit"]:hover {
   background-color: hsl(154 59% 51% / 0.75);
+  box-shadow: 0px 4px 0px 0px hsla(154, 59%, 46%, 0.75);
 }
 
 form p {
   padding-left: 1rem;
   padding-right: 1rem;
   font-size: 11px;
-  line-height: 1.25rem;
+  line-height: 22px;
   --tw-text-opacity: 1;
   color: hsl(246 25% 77% / var(--tw-text-opacity));
 }
@@ -812,7 +810,7 @@ label {
   background: url("./images/icon-error.svg") no-repeat;
   background-size: cover;
   position: absolute;
-  right: 0.75rem;
+  right: 27px;
   z-index: 20;
   display: block;
   height: 1.5rem;
@@ -846,8 +844,6 @@ label {
 
 .attribution a {
   font-weight: 700;
-  --tw-text-opacity: 1;
-  color: hsl(249 10% 26% / var(--tw-text-opacity));
 }
 
 .attribution a:hover {
@@ -855,20 +851,52 @@ label {
           text-decoration-line: underline;
 }
 
-.img-comp-img.img-comp-overlay {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: auto;
-  width: auto;
-  overflow: hidden;
-  text-align: left;
-}
+@media (orientation: portrait) or (max-width: 375px) {
+  body::before {
+    background: url("./images/bg-intro-mobile.png");
+    position: absolute;
+    z-index: -10;
+    height: 100%;
+    width: 100vw;
+    --tw-bg-opacity: 1;
+    background-color: hsl(0 100% 74% / var(--tw-bg-opacity));
+  }
 
-.img-comp-img img {
-  left: 0px;
-  display: block;
-  height: 100vh;
-  width: 100vw;
-  max-width: none;
+  .hero p {
+    font-weight: 400;
+  }
+
+  .form {
+    margin-top: 0px;
+  }
+
+  .cta {
+    margin-bottom: 24px;
+    padding-top: 1.25rem;
+    padding-bottom: 18px;
+  }
+
+  .cta,
+  form {
+    border-radius: 10px;
+  }
+
+  form input {
+    margin-bottom: 16px;
+    padding-top: 17px;
+    padding-bottom: 15px;
+  }
+
+  form button[type="submit"] {
+    box-shadow: 0px 4px 0px 0px hsl(154, 59%, 46%);
+    margin-bottom: 14px;
+    padding-top: 18px;
+    padding-bottom: 11px;
+    font-size: 15px;
+    letter-spacing: 0.065rem;
+  }
+
+  form p {
+    line-height: 1.25rem;
+  }
 }

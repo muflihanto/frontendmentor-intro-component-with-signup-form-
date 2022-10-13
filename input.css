@@ -12,16 +12,12 @@ body {
 body::before {
   content: "";
   background: url("./images/bg-intro-desktop.png") no-repeat;
-  background-size: 1412px 800px;
+  /* background-size: calc(1412 / 1440 * 100vw) 100vh; */
+  padding-inline: 14px;
+  background-origin: content-box;
+  background-size: cover;
   background-position: center;
-  @apply absolute -z-10 bg-primary-red w-screen h-screen;
-}
-
-@media (orientation: portrait) or (max-width: 375px) {
-  body::before {
-    background: url("./images/bg-intro-mobile.png");
-    @apply absolute -z-10 bg-primary-red w-screen h-full;
-  }
+  @apply absolute -z-10 bg-primary-red w-screen h-full;
 }
 
 main {
@@ -37,12 +33,12 @@ main {
 }
 
 .hero p {
-  @apply leading-[26px];
+  @apply leading-[26px] text-white/75 font-medium;
 }
 
 .cta {
   box-shadow: 0px 8px 0px 0px rgba(0, 0, 0, 0.15);
-  @apply bg-accent leading-[25px] rounded-lg px-14 tracking-[0.005rem] text-white pt-[calc(100vh/800*21)] pb-[calc(100vh/800*17)] mb-[calc(100vh/800*24)] text-[15px] w-full;
+  @apply font-light tracking-[0.02rem] bg-accent leading-[25px] rounded-lg px-14 text-white pt-[calc(100vh/800*19)] pb-[calc(100vh/800*16)] mb-[calc(100vh/800*24)] text-[15px] w-full;
 }
 
 .cta span {
@@ -50,7 +46,7 @@ main {
 }
 
 .form {
-  @apply w-full lg:w-[86vw];
+  @apply w-full lg:w-[86vw] mt-1;
 }
 
 form {
@@ -59,24 +55,24 @@ form {
 }
 
 form input {
-  @apply w-full px-[18px] pt-[calc(100vh/800*15)] pb-[calc(100vh/800*14)] border-base-200/60 border-[1px] rounded-md placeholder:text-base-100/75 placeholder:text-sm placeholder:font-semibold mb-[calc(100vh/800*16)] placeholder:tracking-[0.01rem] lg:mb-[calc(100vh/800*20)] lg:px-[32px] focus:outline focus:outline-base-100 focus:outline-1 font-semibold;
+  @apply w-full px-[18px] pt-[calc(100vh/800*17)] pb-[calc(100vh/800*15)] border-base-200/60 border-[1px] rounded-md placeholder:text-base-100/75 placeholder:text-sm placeholder:font-semibold mb-[calc(100vh/800*16)] placeholder:tracking-[0.01rem] lg:mb-[calc(100vh/800*20)] lg:px-[calc(100vh/800*32)] focus:border focus:outline-none focus:border-base-100/70 text-sm font-semibold text-base-100;
 }
 
 .invalid {
   @apply border-primary-red text-primary-red placeholder:text-primary-red focus:outline-none relative;
 }
 
+form button[type="submit"] {
+  box-shadow: 0px 4px 0px 0px hsl(154, 59%, 46%);
+  @apply bg-primary-green font-medium  hover:bg-primary-green/75 text-white pt-[calc(100vh/800*18)] pb-[calc(100vh/800*10)] w-full rounded-md uppercase tracking-[0.0275rem] mb-[calc(100vw/800*9)];
+}
+
 form button[type="submit"]:hover {
   box-shadow: 0px 4px 0px 0px hsla(154, 59%, 46%, 0.75);
 }
 
-form button[type="submit"] {
-  box-shadow: 0px 4px 0px 0px hsl(154, 59%, 46%);
-  @apply bg-primary-green hover:bg-primary-green/75 text-white pt-[calc(100vh/800*16)] pb-[calc(100vh/800*12)] w-full rounded-md uppercase tracking-wider mb-[calc(100vw/800*8)];
-}
-
 form p {
-  @apply text-[11px] leading-5 text-base-200 px-4;
+  @apply text-[11px] leading-[22px] text-base-200 px-4;
 }
 
 form p a {
@@ -91,7 +87,7 @@ label {
   content: "";
   background: url("./images/icon-error.svg") no-repeat;
   background-size: cover;
-  @apply block absolute right-3 w-6 h-6 z-20;
+  @apply block absolute right-[27px] w-6 h-6 z-20;
 }
 
 .required {
@@ -103,13 +99,35 @@ label {
 }
 
 .attribution a {
-  @apply text-base-100 font-bold hover:underline;
+  @apply font-bold hover:underline;
 }
 
-.img-comp-img.img-comp-overlay {
-  @apply top-0 left-0 absolute w-auto h-auto overflow-hidden text-left;
-}
-
-.img-comp-img img {
-  @apply block h-screen w-screen max-w-none left-0;
+@media (orientation: portrait) or (max-width: 375px) {
+  body::before {
+    background: url("./images/bg-intro-mobile.png");
+    @apply absolute -z-10 bg-primary-red w-screen h-full;
+  }
+  .hero p {
+    @apply font-normal;
+  }
+  .form {
+    @apply mt-0;
+  }
+  .cta {
+    @apply pt-5 pb-[18px] mb-[24px];
+  }
+  .cta,
+  form {
+    border-radius: 10px;
+  }
+  form input {
+    @apply mb-[16px] pt-[17px] pb-[15px];
+  }
+  form button[type="submit"] {
+    box-shadow: 0px 4px 0px 0px hsl(154, 59%, 46%);
+    @apply tracking-[0.065rem] text-[15px] pt-[18px] pb-[11px] mb-[14px];
+  }
+  form p {
+    @apply leading-5;
+  }
 }
